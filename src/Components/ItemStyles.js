@@ -1,0 +1,81 @@
+import styledComponents from "styled-components";
+
+
+export const ItemRow = styledComponents.li`
+
+    width:100%;
+    border: 1px solid #489A65;
+    padding: 1% 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;   
+    overflow: hidden;
+
+    div {
+        width: 15%;
+        display: flex;
+        align-items: center;
+        width: 100%;        
+    }
+    .div_span {
+        justify-content: left;
+        width:80%;
+    }
+    .div_icons{
+        justify-content: right;
+        heigth: auto;
+    }
+    span {
+        width:80%;
+        overflow:hidden;
+    }
+    form {
+        display:flex;
+        width: 100%;
+    }
+    svg {
+        font-size: 1.5rem;
+        color: #041C14;
+        padding: 0 5%;
+        &:hover {
+            color: #489964;
+            cursor:pointer;
+    }
+    }
+    button {
+        border:none;
+        background: none;
+        margin: 0 2%;
+        
+    }
+    .input_edit {
+        width: 100%;
+        margin: 0;
+        padding: .5% 0;
+    }
+    .edit_button {
+        justify-content: right;
+        width:20%;
+        margin: 0;
+    }
+    .input_checkbox {
+        margin-right: 2%;
+    }
+    
+
+    @media (max-width: 540px) {
+        
+
+        .div_span {
+            heigth: auto;
+            overflow:hidden;
+        }
+        span {
+            width:100%;
+        }
+        .div_icons {
+            width: 30%;
+        }
+      }
+`
