@@ -6,7 +6,7 @@ export const HeaderContainer = styledComponents.div`
     display: flex;
     width: 100%;
     padding: 4% 0;
-    background-color: #48D965;
+    background-color: ${({theme}) => theme.color};
     justify-content: center;
     border-radius: 1%;
 
@@ -16,7 +16,7 @@ export const HeaderContainer = styledComponents.div`
 
     h1 {
         font-size: 1.5rem;
-        color: #EDFAF5;
+        color: #fff;
     }
 
 `

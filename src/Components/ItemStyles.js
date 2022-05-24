@@ -4,7 +4,7 @@ import styledComponents from "styled-components";
 export const ItemRow = styledComponents.li`
 
     width:100%;
-    border: 1px solid #489A65;
+    border: 1px solid ${({theme}) => theme.color};
     padding: 1% 2%;
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,7 @@ export const ItemRow = styledComponents.li`
         color: #041C14;
         padding: 0 5%;
         &:hover {
-            color: #489964;
+            color: ${({theme}) => theme.subColor};
             cursor:pointer;
     }
     }

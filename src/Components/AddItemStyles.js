@@ -15,7 +15,7 @@ export const AddBtn = styledComponents.form`
         padding:1%;
         margin: 0 3%;
     &:focus {
-        outline: solid 1px #48D965;
+        outline: solid 1px  ${({theme}) => theme.color};
     }
     }
 
@@ -25,12 +25,12 @@ export const AddBtn = styledComponents.form`
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #48D965;
+        color: ${({theme}) => theme.color};
         height: 100%;
         width:4vw;
         
         &:hover {
-            color: #489A65;
+            color: ${({theme}) => theme.subColor};
             cursor: pointer;
         }
     }
