@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "text": "Item traido de una api"
+    },
+    {
+      "id":2,
+      "text": "Este es otro item"
+    },
+    {
+      "id":3,
+      "text": "hola"
+    }
+  ]
+}

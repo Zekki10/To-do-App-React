@@ -1,4 +1,4 @@
-import { MdCheckCircle, MdDelete, MdModeEditOutline } from "react-icons/md";
+import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { SiAddthis } from "react-icons/si";
 import { ItemRow } from "./ItemStyles";
 import React, { useState, useContext } from 'react';
@@ -17,6 +17,8 @@ export const Item = ({text, id, editTexts}) => {
             setValue('')
         }
     }
+
+
     const deleteItem = id => {
         const newTexts = texts.filter(item=> item !== text )
         setTexts(newTexts)

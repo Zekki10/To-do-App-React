@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-//Es un componente para dar estilos globales
 
 export const GlobalStyle = createGlobalStyle`
 

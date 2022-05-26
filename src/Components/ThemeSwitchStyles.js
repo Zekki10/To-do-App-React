@@ -2,11 +2,18 @@ import styledComponents from "styled-components";
 
 
 export const SwitchTheme = styledComponents.div`
-
+    
+    margin: 5% 0 0;
     display:flex;
     justify-content:center;
     align-items: center;
-
+    flex-direction:column;
+    div {
+        width:180px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
     button {
         width: 35px;
         height: 35px;

@@ -7,6 +7,15 @@ export const ListContainer = styledComponents.ul`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    list-style:none
+    list-style:none;
+
+    .error {
+        padding: 2%;
+        background-color: #ff6961
+    }
+    .loading {
+        padding: 2%;
+        background-color: ${({theme}) => theme.color};
+    }
 
 `

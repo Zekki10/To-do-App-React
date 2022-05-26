@@ -1,4 +1,3 @@
-import './App.css';
 import { AddItem } from './Components/AddItem';
 import { GlobalStyle } from './Components/GlobalStyle';
 import Header from './Components/Header';
