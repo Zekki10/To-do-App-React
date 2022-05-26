@@ -6,7 +6,8 @@ import { ThemeSwitch } from './Components/ThemeSwitch';
 import { DataProvider } from './Context/DataProvider';
 import { useThemeMode } from './Hooks/useThemeMode';
 import { ThemeProvider } from 'styled-components';
-
+import { QueryClient, QueryClientProvider} from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const themes = {
   green: {
@@ -22,23 +23,24 @@ const themes = {
     subColor:'#454546'
   }
 }
-
+const queryClient = new QueryClient()
 
 function App() {
   const [theme, switchTheme] = useThemeMode();
 
   return (
-
-    <DataProvider>
-      <ThemeProvider theme={themes[theme]}>
-        <GlobalStyle />
-        <Header />
-        <AddItem />
-        <ItemList />
-        <ThemeSwitch handleClick={switchTheme} />
-      </ThemeProvider>
-    </DataProvider>
-
+    <QueryClientProvider client={ queryClient }>
+      <DataProvider>
+        <ThemeProvider theme={themes[theme]}>
+          <GlobalStyle />
+          <Header />
+          <AddItem />
+          <ItemList />
+          <ThemeSwitch handleClick={switchTheme} />
+        </ThemeProvider>
+      </DataProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

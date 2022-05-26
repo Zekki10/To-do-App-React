@@ -1,19 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ListContainer } from "./ItemListStyles"
 import { Item } from "./Item"
 import { DataContext } from "../Context/DataProvider"
+import { useQuery } from 'react-query'
+import { getItemList } from '../api/querysItems'
 
 
 export const ItemList = () => {
-
-    const [texts, setTexts] = useContext(DataContext);
-    const [load, setLoad] = useState(false);
-
     
+    const [texts, setTexts] = useContext(DataContext);
+    const {data, error, isLoading, isError} = useQuery(['items'], getItemList)
+
     const editTexts = (value,id) => {
+        
         const newTexts = [...texts];
-        newTexts.forEach((text, index) => {
-            if(index === id){
+        newTexts.forEach((text) => {
+            if(text.id === id){
                 text.name = value;
             }
         })
@@ -21,55 +23,46 @@ export const ItemList = () => {
     }
     
 
-    const getItem = () => {
-        
-        fetch(`http://localhost:5000/items`)
-        .then((response) => {
-            return response.json()
-        })
-        .then( (res)=> { 
-            const newTexts = [...texts]
-            for (let item of res) {
-                newTexts.push({name: item.text, id:item.id})
-            }  
-            setTexts(newTexts)
-            setLoad(true) 
-        })
-        .catch (() => {
-            console.error('error de servidor');
-            setLoad(false)
-        })
-    }
     useEffect(() => {
         try {
-            getItem()
-        } catch {
-            console.log('error')
+            const newTexts = [...texts]
+                for (let item of data) {
+                    newTexts.push({name: item.name, id:item.id})
+                }  
+                setTexts(newTexts)
+        } catch {  
         }
-    }, [])
+    }, [data])
         
    
-
-    if (load) {
+    if (!isLoading && !isError) {
         
         return (
             <ListContainer>
                 {
                     texts.map((text, index) => (
-                        <Item text={text} key={index} id={index} editTexts={editTexts} />
+                        <Item text={text} key={index} id={text.id} editTexts={editTexts} />
                     ))
                 }
             </ListContainer>
         )
+    } else if (isError) {
+
+        return (
+            <ListContainer>
+                <span className='error'>cannot connect... try 'npm run fake-api'</span>
+                {
+                    texts.map((text, index) => (
+                        <Item text={text} key={index} id={text.id} editTexts={editTexts} />
+                    ))
+                }
+            </ListContainer>
+        )
+
     } else {
         return (
             <ListContainer>
-                <span className='loading'>Loading... try 'npm run fake-api'</span>
-                {
-                    texts.map((text, index) => (
-                        <Item text={text} key={index} id={index} editTexts={editTexts} />
-                    ))
-                }
+                <span className='loading'>Loading... </span>   
             </ListContainer>
         )
     }

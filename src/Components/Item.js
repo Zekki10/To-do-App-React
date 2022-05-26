@@ -2,13 +2,20 @@ import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { SiAddthis } from "react-icons/si";
 import { ItemRow } from "./ItemStyles";
 import React, { useState, useContext } from 'react';
-import { DataContext } from "../Context/DataProvider"
+import { DataContext } from "../Context/DataProvider";
+import { useMutation } from "react-query";
+import { deleteItemQuery, updateItem } from "../api/querysItems";
+
+
 
 export const Item = ({text, id, editTexts}) => {
 
     const [texts, setTexts] = useContext(DataContext);
     const [onEdit, setOnEdit] = useState(false);
     const [value, setValue] = useState(text.name);
+    const { mutate } = useMutation(deleteItemQuery);
+    const { editate } = useMutation(updateItem);
+
 
     const edit = id => {
         setOnEdit(false);
@@ -16,12 +23,13 @@ export const Item = ({text, id, editTexts}) => {
             editTexts(value,id)
             setValue('')
         }
+        updateItem(id, {id:id, name:value})
     }
-
 
     const deleteItem = id => {
         const newTexts = texts.filter(item=> item !== text )
         setTexts(newTexts)
+        deleteItemQuery(id)
     }
 
     if (onEdit === true) {
@@ -56,8 +64,5 @@ export const Item = ({text, id, editTexts}) => {
             </div>
             </ItemRow>
         )
-    }
-
-    
-    
+    }    
 }

@@ -2,6 +2,8 @@ import { AddBtn } from "./AddItemStyles"
 import { SiAddthis } from "react-icons/si";
 import { useState, useContext } from 'react';
 import { DataContext } from "../Context/DataProvider"
+import { useMutation } from "react-query";
+import { createNewItem } from "../api/querysItems";
 
 
 
@@ -10,7 +12,8 @@ export const AddItem = (props) => {
 
     const [texts, setTexts] = useContext(DataContext);
     const [inputText, setInputText] = useState('');
-    const [id, setId] = useState(1);
+    const [id, setId] = useState(Math.round(Math.random()*100000));
+    const {mutate, error, isLoading} = useMutation(createNewItem);
 
     const getText = (event) => {
         setInputText(event.target.value);
@@ -18,15 +21,21 @@ export const AddItem = (props) => {
 
    const submit = (event) => {
         
-    //Evita que la pag. se actualice
         event.preventDefault();
-        setId(id + 1);
+        
+        setId(Math.round(Math.random()*100000));
+        
         if (inputText.trim() !== '') {
-            setTexts([...texts, {name: inputText, id:id}])
+            setTexts([...texts, {id:id, name: inputText }])
+            sendItem({id:id, name: inputText});
             setInputText('');
         }
-
     }
+
+    const sendItem = (newItem) => {
+        mutate(newItem)
+    }
+
 
     return (
         <div>
