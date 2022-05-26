@@ -39,7 +39,6 @@ function App() {
           <ThemeSwitch handleClick={switchTheme} />
         </ThemeProvider>
       </DataProvider>
-      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
