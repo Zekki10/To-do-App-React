@@ -3,8 +3,8 @@ import { useState } from "react"
 
 
 export const useThemeMode = () => {
-    
-    const [theme, setTheme] = useState("green");
+    const initialColor = localStorage.getItem('theme')
+    const [theme, setTheme] = useState(initialColor);
     
     const switchTheme = (theme) => {
         
