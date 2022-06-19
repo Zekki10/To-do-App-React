@@ -1,8 +1,6 @@
 
 # To do List 
 
-### Este proyecto se hizo en el marco de una pruega técnica para una propuesta laboral.
-
 Para el manejo de **estilos** se utilizo la libreria Styled Components
 https://styled-components.com/
 
