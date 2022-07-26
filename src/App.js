@@ -7,7 +7,6 @@ import { DataProvider } from './Context/DataProvider';
 import { useThemeMode } from './Hooks/useThemeMode';
 import { ThemeProvider } from 'styled-components';
 import { QueryClient, QueryClientProvider} from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
 
 const themes = {
   green: {
@@ -33,10 +32,10 @@ function App() {
       <DataProvider>
         <ThemeProvider theme={themes[theme]}>
           <GlobalStyle />
-          <Header />
+          <Header handleClick={switchTheme} />
           <AddItem />
           <ItemList />
-          <ThemeSwitch handleClick={switchTheme} />
+          {/* <ThemeSwitch handleClick={switchTheme} /> */}
         </ThemeProvider>
       </DataProvider>
     </QueryClientProvider>

@@ -34,7 +34,7 @@ export const ItemList = () => {
         }
     }, [data])
         
-   
+    console.log(isError)
     if (!isLoading && !isError) {
         
         return (
@@ -46,8 +46,14 @@ export const ItemList = () => {
                 }
             </ListContainer>
         )
-    } else if (isError) {
-
+    } else if (isLoading) {
+        return (
+            <ListContainer>
+                <span className='loading'>Loading... </span>   
+            </ListContainer>
+        )
+        
+    } else {
         return (
             <ListContainer>
                 <span className='error'>cannot connect... try 'npm run fake-api'</span>
@@ -58,12 +64,7 @@ export const ItemList = () => {
                 }
             </ListContainer>
         )
-
-    } else {
-        return (
-            <ListContainer>
-                <span className='loading'>Loading... </span>   
-            </ListContainer>
-        )
+        
     }
 }
+

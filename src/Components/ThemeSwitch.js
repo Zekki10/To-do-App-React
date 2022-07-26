@@ -17,6 +17,6 @@ export const ThemeSwitch = ({handleClick}) => {
                 <button className="dark" onClick={() => setTheme('dark')}></button>
                 <button className="blue" onClick={() => setTheme('blue')}></button>
             </div>
-            </SwitchTheme>
+        </SwitchTheme>
     )
 }
