@@ -1,13 +1,12 @@
 import { HeaderContainer } from "./HeaderStyle";
 import { FaListAlt } from "react-icons/fa";
 import { IoMdColorPalette } from "react-icons/io"
-import { ThemeSwitch } from '../Components/ThemeSwitch';
+import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch';
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai"
 const Header = ({handleClick}) => {
     const [openStyle, setOpenStyle] = useState(false)
 
-    console.log(handleClick)
     return (
 
         <HeaderContainer>

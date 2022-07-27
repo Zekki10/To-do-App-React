@@ -10,7 +10,6 @@ export const useThemeMode = () => {
     } else { 
         initialColor = 'green'
     }
-    console.log(initialColor)
     
     const [theme, setTheme] = useState(initialColor);
     

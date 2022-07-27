@@ -1,8 +1,8 @@
-import { AddItem } from './Components/AddItem';
+import { AddItem } from './Components/AddItem/AddItem';
 import { GlobalStyle } from './Components/GlobalStyle';
-import Header from './Components/Header';
-import { ItemList } from './Components/ItemList';
-import { ThemeSwitch } from './Components/ThemeSwitch';
+import Header from './Components/Header/Header';
+import { ItemList } from './Components/ItemList/ItemList';
+// import { ThemeSwitch } from './Components/ThemeSwitch';
 import { DataProvider } from './Context/DataProvider';
 import { useThemeMode } from './Hooks/useThemeMode';
 import { ThemeProvider } from 'styled-components';

@@ -1,15 +1,16 @@
 import React, { useContext, useEffect } from 'react'
 import { ListContainer } from "./ItemListStyles"
-import { Item } from "./Item"
-import { DataContext } from "../Context/DataProvider"
+import { Item } from "../Item/Item"
+import { DataContext } from "../../Context/DataProvider"
 import { useQuery } from 'react-query'
-import { getItemList } from '../api/querysItems'
+// import { getItemList } from '../api/querysItems'
+import getProducts from '../../utils/querysItemsFirebase'
 
 
 export const ItemList = () => {
     
-    const [texts, setTexts] = useContext(DataContext);
-    const {data, error, isLoading, isError} = useQuery(['items'], getItemList)
+    const {texts, setTexts} = useContext(DataContext);
+    const {data, isLoading, isError} = useQuery(['items'], getProducts)
 
     const editTexts = (value,id) => {
         
@@ -34,7 +35,6 @@ export const ItemList = () => {
         }
     }, [data])
         
-    console.log(isError)
     if (!isLoading && !isError) {
         
         return (
