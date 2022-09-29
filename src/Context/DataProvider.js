@@ -1,19 +1,60 @@
-import React, {useState, createContext } from 'react';
+import React, {useState, createContext, useEffect } from 'react';
+import getItems from '../../utils/querysItemsFirebase'
+import { useQuery } from 'react-query'
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore'
+import db from "../utils/firebaseConfig";
+ 
+const dataContext = createContext();
 
-export const DataContext = createContext();
-
-
-export const DataProvider = (props) => {
+const DataProvider = ({children}) => {
+    const {isLoading, isError} = useQuery(['items'], getItems)
     const [texts, setTexts] = useState([])
-    
-    const data = {
+    const [value, setValue] = useState('');
+
+    useEffect(() => {
+        return (() => {
+            try {
+                getItems().then((response) => {
+                    console.log(response)
+                    const newTexts = [...texts]
+                    for (let item of response) {
+                        newTexts.push({name: item.name, id:item.id, checked:item.checked})
+                    }  
+                    setTexts(newTexts)
+                }) 
+            } catch {  
+            }
+        })  
+    }, [])
+
+    const saveData = async (newOrder) => {
+        const orderFirebase = collection(db, "items");
+        const orderDoc = await addDoc(orderFirebase, newOrder)
+        console.log(orderDoc)
+      }
+    const edit = (id,value) => {
+        if(value) {
+            setValue('')
+        }
+        updateDoc(doc(db, "items", id) , { name:value });
+    }
+    const info = {
         texts,
-        setTexts
+        setTexts,
+        isLoading,
+        isError,
+        saveData,
+        edit,
+        value,
+        setValue
     }
 
     return (
-        <DataContext.Provider value={data} >
-            {props.children}
-        </DataContext.Provider>
+        <dataContext.Provider value={info} >
+            {children}
+        </dataContext.Provider>
     )
 }
+
+export default dataContext
+export { DataProvider }

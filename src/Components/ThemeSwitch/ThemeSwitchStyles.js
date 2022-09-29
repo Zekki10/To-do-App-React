@@ -1,6 +1,5 @@
 import styledComponents from "styled-components";
 
-
 export const SwitchTheme = styledComponents.div`
     
     display:flex;

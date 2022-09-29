@@ -2,33 +2,38 @@ import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { SiAddthis } from "react-icons/si";
 import { ItemRow } from "./ItemStyles";
 import React, { useState, useContext } from 'react';
-import { DataContext } from "../../Context/DataProvider";
-import { updateDoc, deleteDoc, doc } from "firebase/firestore";
-import db from "../../utils/firebaseConfig"
+import DataContext from "../../Context/DataProvider";
 
+export const Item = ({text, itemID, editTexts}) => {
 
-export const Item = ({text, id, editTexts}) => {
-
-    const { texts, setTexts } = useContext(DataContext);
+    const { edit } = useContext(DataContext);
     const [onEdit, setOnEdit] = useState(false);
     const [value, setValue] = useState(text.name);
-    
-    const edit = id => {
+    const [isChecked, setChecked] = useState(text.checked || false)
+    // const [id, setID] = useState('')
+
+
+    const editValue = () => {
         setOnEdit(false);
+
         if(value) {
-            editTexts(value,id)
+            edit(text.id,value)
             setValue('')
         }
-        updateDoc(doc(db, "items", id), {id:id, name:value});
-        // updateItem(id, {id:id, name:value})
+
     }
 
-    const deleteItem = id => {
-        const newTexts = texts.filter(item=> item !== text )
-        setTexts(newTexts)
-        deleteDoc(doc(db, "items", id));
-    }
+    // const deleteItem = () => {
+       
+    //     const newTexts = texts.filter(item => item !== text )
+    //     setTexts(newTexts)
+    //     deleteDoc(doc(db, "items", text.itemID || text.id));
+    // }
 
+    // const setCheck = () =>{
+    //     setChecked(!isChecked)
+    //     updateDoc(doc(db, "items", id), {checked:!isChecked || false});
+    // }
     if (onEdit === true) {
         
         return (
@@ -36,7 +41,7 @@ export const Item = ({text, id, editTexts}) => {
                 <form>
                     <input className="input_edit" value={value} onChange={event => setValue(event.target.value)} />
                     <div className="edit_button">
-                        <button onClick={() => edit(id)}>
+                        <button onClick={() => editValue(text.id, text.name)}>
                             <SiAddthis />
                         </button>
                     </div>
@@ -44,11 +49,11 @@ export const Item = ({text, id, editTexts}) => {
             </ItemRow>
         )
  
-    } else {
+    } else if (!isChecked) {
         return (
             <ItemRow>
             <div className="div_span">
-                <input className="input_checkbox" type='checkbox' />
+                <input className="input_checkbox" type='checkbox' defaultChecked={text.checked}  />
                 <span>{text.name}</span>
             </div>
             <div className="div_icons">
@@ -56,10 +61,27 @@ export const Item = ({text, id, editTexts}) => {
                     <MdModeEditOutline /> 
                 </button>
                 <button>
-                    <MdDelete onClick={() => deleteItem(id)} />
+                    <MdDelete onClick={() => console.log("delte")} />
                 </button>
             </div>
             </ItemRow>
         )
-    }    
+    } else {
+        return (
+        <ItemRow className="li_checked">
+            <div className="div_span checked">
+                <input className="input_checkbox checked" type='checkbox' defaultChecked={text.checked} onChange={() => console.log('check')} />
+                <span className="checked">{text.name}</span>
+            </div>
+            <div className="div_icons checked">
+                {/* <button onClick={() => setOnEdit(true)}>
+                    <MdModeEditOutline /> 
+                </button> */}
+                <button>
+                    <MdDelete onClick={() => console.log('delte')} />
+                </button>
+            </div>
+        </ItemRow>
+        )
+    }
 }

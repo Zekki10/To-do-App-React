@@ -11,6 +11,10 @@ export const ItemRow = styledComponents.li`
     align-items: center;
     height: auto;   
     overflow: hidden;
+    &.li_checked {
+        border: 1px solid #808080;
+        background-color: #dcdcdc
+    }
 
     div {
         width: 15%;
@@ -29,6 +33,9 @@ export const ItemRow = styledComponents.li`
     span {
         width:80%;
         overflow:hidden;
+        &.checked {
+            text-decoration:line-through;
+        }
     }
     form {
         display:flex;
@@ -62,6 +69,32 @@ export const ItemRow = styledComponents.li`
     .input_checkbox {
         margin-right: 2%;
     }
+    input[type="checkbox"] {
+        appearance: none;
+        height:15px;
+        width:15px;
+        border: 1px solid ${({theme}) => theme.subColor};
+        cursor:pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:after {
+            content:"✓";
+            font-weight:900;
+            display:none;
+        }
+        &:hover {
+            background-color:none;
+        }
+        &:checked{
+            border:1px solid #808080;
+            background-color: #808080;
+        }
+        &:checked:after {
+            display:flex;
+        } 
+    }
+    
     
 
     @media (max-width: 540px) {
