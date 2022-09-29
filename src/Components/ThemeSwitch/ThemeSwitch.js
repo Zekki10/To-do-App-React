@@ -1,9 +1,12 @@
 import { SwitchTheme } from "./ThemeSwitchStyles"
 
-export const ThemeSwitch = ({onClick}) => {
+
+
+
+export const ThemeSwitch = ({handleClick}) => {
 
     const setTheme = (theme) => {
-        onClick(theme)
+        handleClick(theme)
         localStorage.setItem('theme',theme)
     }
     return (

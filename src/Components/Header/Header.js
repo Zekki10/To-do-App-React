@@ -4,8 +4,7 @@ import { IoMdColorPalette } from "react-icons/io"
 import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch';
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai"
-
-const Header = ({onClick}) => {
+const Header = ({handleClick}) => {
     const [openStyle, setOpenStyle] = useState(false)
 
     return (
@@ -26,7 +25,7 @@ const Header = ({onClick}) => {
                     <button className="close_theme_button" onClick={() => setOpenStyle(false)}>
                         <AiOutlineClose />
                     </button>
-                    <ThemeSwitch onClick={onClick} />
+                    <ThemeSwitch handleClick={handleClick} />
                 </div>
             }
         </HeaderContainer>
